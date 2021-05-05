@@ -1,0 +1,36 @@
+class_params:
+  alpha: 0.0001
+  loss: hinge
+  max_iter: 10000
+  penalty: l2
+  type: SGDClassifier
+  type_save: probs
+features_params:
+  binary_cols:
+  - exang
+  - fbs
+  - sex
+  categorical_cols: []
+  numerical_cols:
+  - oldpeak
+  - trestbps
+  - thal
+  - chol
+  - restecg
+  - age
+  - ca
+  - cp
+  - thalach
+  - slope
+  target_col: target
+input_data_path: project/data/raw/test.csv
+metric_path: project/models/metrics.json
+models_params:
+  categorical_vectorizer_path: project/models/dv_x.pkl
+  classifier_path_postfix: project/models/classifier.pkl
+  fill_empty: -111
+  imputer_path: project/models/imputer.pkl
+  scaling_path: project/models/scaler.pkl
+params_for_save:
+  path_to_save: configs/predict_config_sgd.yaml
+prediction_path: project/predict/prediction.csv

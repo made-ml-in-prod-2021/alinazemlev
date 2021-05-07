@@ -17,10 +17,10 @@ from ..enities.models_params import ModelsParams
 import joblib
 from sklearn.impute import SimpleImputer
 
-params = Union[TrainPipelineParams, PredictPipelineParams]
+PARAMS = Union[TrainPipelineParams, PredictPipelineParams]
 
 
-def build_pipeline(pipeline_params: params, logger: logging.Logger) -> Pipeline:
+def build_pipeline(pipeline_params: PARAMS, logger: logging.Logger) -> Pipeline:
     num_pipeline = Pipeline([("imp", FillMissing(pipeline_params.models_params)),
                              ("scale", Scaling(pipeline_params.models_params))])
 

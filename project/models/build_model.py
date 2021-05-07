@@ -24,8 +24,9 @@ class Model:
 
     @staticmethod
     def get_name(prefix: str, path: str) -> str:
-        name = prefix + path.split("/")[-1]
-        return "/".join(path.split("/")[:-1]) + "/" + name
+        splits = path.split("/")
+        name = prefix + splits[-1]
+        return "/".join(splits[:-1]) + "/" + name
 
     def fit(self, X: np.array, y: np.array) -> "Model":
         clf, prefix = self.get_clf()

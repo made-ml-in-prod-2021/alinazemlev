@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from project.enities.params_for_save import SaveParams
-from project.enities.features_params import FeaturesParams
-from project.enities.models_params import ModelsParams
-from project.enities.classifier_params import ClassifierParams
+from ml_project.enities.params_for_save import SaveParams
+from ml_project.enities.features_params import FeaturesParams
+from ml_project.enities.models_params import ModelsParams
+from ml_project.enities.classifier_params import ClassifierParams
 from marshmallow_dataclass import class_schema
 import yaml
 

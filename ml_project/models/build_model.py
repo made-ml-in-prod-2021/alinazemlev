@@ -15,6 +15,23 @@ def init_model(model_params: ModelsParams, class_params: ClassifierParams) -> "M
     return Model(model_params, class_params)
 
 
+def get_clf(class_params) -> List:
+    dict_models = {
+        "SGDClassifier":
+            [SGDClassifier(max_iter=class_params.max_iter,
+                           alpha=class_params.alpha,
+                           penalty=class_params.penalty,
+                           loss=class_params.loss), "sgd_"],
+
+        "LogisticRegression": [LogisticRegression(max_iter=class_params.max_iter,
+                                                  penalty=class_params.penalty, ), "log_"]
+
+    }
+    if class_params.type not in dict_models.keys():
+        raise Exception(f"The model type: {class_params.type} is not supported.")
+    return dict_models[class_params.type]
+
+
 class Model:
     def __init__(self, models_params: ModelsParams,
                  class_params: ClassifierParams):
@@ -29,30 +46,14 @@ class Model:
         return "/".join(splits[:-1]) + "/" + name
 
     def fit(self, X: np.array, y: np.array) -> "Model":
-        clf, prefix = self.get_clf()
+        clf, prefix = get_clf(self.class_params)
         clf.fit(X, y)
         joblib.dump(clf, Model.get_name(prefix, self.models_params.classifier_path_postfix))
         self.clf = clf
         return self
 
-    def get_clf(self) -> List:
-        dict_models = {
-            "SGDClassifier":
-                [SGDClassifier(max_iter=self.class_params.max_iter,
-                               alpha=self.class_params.alpha,
-                               penalty=self.class_params.penalty,
-                               loss=self.class_params.loss), "sgd_"],
-
-            "LogisticRegression": [LogisticRegression(max_iter=self.class_params.max_iter,
-                                                      penalty=self.class_params.penalty, ), "log_"]
-
-        }
-        if self.class_params.type not in dict_models.keys():
-            raise Exception(f"The model type: {self.class_params.type} is not supported.")
-        return dict_models[self.class_params.type]
-
     def load_from_file(self):
-        _, prefix = self.get_clf()
+        _, prefix = get_clf(self.class_params)
         self.clf = joblib.load(Model.get_name(prefix, self.models_params.classifier_path_postfix))
 
     def evaluate(self, X: np.array, y: np.array,

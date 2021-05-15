@@ -1,14 +1,16 @@
 import os
+import json
 from py._path.local import LocalPath
 import sys
+
 PATH = os.getcwd()
 sys.path.insert(0, PATH)
 
-from project.train import (
+from ml_project.train import (
     train_pipeline
 )
 
-from project.enities import (
+from ml_project.enities import (
     SplitParams,
     FeaturesParams,
     ModelsParams,
@@ -54,3 +56,5 @@ def test_train_e2e(
     train_pipeline(params)
     assert os.path.exists(expected_model_path)
     assert os.path.exists(params.metric_path)
+    metric = json.load(open(params.metric_path, "r"))
+    assert metric["f1_score"] > 0.0

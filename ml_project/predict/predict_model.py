@@ -1,23 +1,15 @@
-import logging
 import click
 import os
 import sys
 PATH = os.getcwd()
 sys.path.insert(0, PATH)
-from project.enities.predict_pipeline_params import PredictPipelineParams, read_predict_pipeline_params
-from project.features.build_features import build_pipeline
-from project.enities.logger_params import setup_logging
-from project.data.make_dataset import read_data
-from project.models.build_model import init_model
+from ml_project.enities.predict_pipeline_params import PredictPipelineParams, read_predict_pipeline_params
+from ml_project.features.build_features import build_pipeline
+from ml_project.enities.logger_params import build_logger
+from ml_project.data.make_dataset import read_data
+from ml_project.models.build_model import init_model
 
-APPLICATION_NAME = "project"
-WARN_APPLICATION_NAME = "project_warn"
-LOGGING_YAML = PATH+ "/configs/logger_conf.yaml"
-
-logger = logging.getLogger(APPLICATION_NAME)
-logger_2 = logging.getLogger(WARN_APPLICATION_NAME)
-setup_logging(LOGGING_YAML)
-
+logger, logger_2 = build_logger(PATH)
 
 def predict_pipeline(predict_pipeline_params: PredictPipelineParams):
     logger.info(f"start predict pipeline with params {predict_pipeline_params}")

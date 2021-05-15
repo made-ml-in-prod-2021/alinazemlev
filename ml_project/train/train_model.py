@@ -1,23 +1,16 @@
 import os
-import logging
-import click
 import sys
+import click
 PATH = os.getcwd()
 sys.path.insert(0, PATH)
-from project.enities.train_pipeline_params import TrainPipelineParams, read_training_pipeline_params
-from project.features.build_features import extract_target, build_pipeline
-from project.enities.logger_params import setup_logging
-from project.data.make_dataset import read_data, split_train_val_data
-from project.models.build_model import init_model
-
-APPLICATION_NAME = "project"
-WARN_APPLICATION_NAME = "project_warn"
-LOGGING_YAML = PATH + "/configs/logger_conf.yaml"
+from ml_project.enities.train_pipeline_params import TrainPipelineParams, read_training_pipeline_params
+from ml_project.features.build_features import extract_target, build_pipeline
+from ml_project.enities.logger_params import build_logger
+from ml_project.data.make_dataset import read_data, split_train_val_data
+from ml_project.models.build_model import init_model
 
 
-logger = logging.getLogger(APPLICATION_NAME)
-logger_2 = logging.getLogger(WARN_APPLICATION_NAME)
-setup_logging(LOGGING_YAML)
+logger, logger_2 = build_logger(PATH)
 
 
 def train_pipeline(training_pipeline_params: TrainPipelineParams):

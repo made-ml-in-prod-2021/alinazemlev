@@ -60,6 +60,17 @@ def dict_class_params() -> dict:
             "max_iter": 10000,
             "type_save": ""}
 
+@pytest.fixture()
+def dict_model_params() -> dict:
+    currdir = os.path.dirname(__file__)
+    return {
+        "scaling_path": os.path.join(currdir, "models/scaling.pkl"),
+        "imputer_path": os.path.join(currdir, "models/imputer.pkl"),
+        "categorical_vectorizer_path": os.path.join(currdir, "models/dv_x.pkl"),
+        "classifier_path_postfix": os.path.join(currdir, "models/classifier.pkl"),
+        "fill_empty": -111,
+    }
+
 
 @pytest.fixture()
 def dict_features_params() -> dict:

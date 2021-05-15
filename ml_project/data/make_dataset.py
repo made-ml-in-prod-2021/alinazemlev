@@ -4,7 +4,7 @@ from typing import Tuple
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from project.enities.split_params import SplitParams
+from ml_project.enities.split_params import SplitParams
 
 
 def read_data(path: str) -> pd.DataFrame:

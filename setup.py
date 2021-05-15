@@ -4,7 +4,7 @@ setup(
     name="ml_project",
     packages=find_packages(),
     version="0.1.0",
-    description="ml project",
+    description="ml ml_project",
     author="Your name (or your organization/company/team)",
     install_requires=[
         "click==7.1.2",

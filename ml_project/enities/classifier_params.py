@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass()
+@dataclass
 class ClassifierParams:
     type: str
     loss: str
@@ -9,3 +9,5 @@ class ClassifierParams:
     alpha: float
     max_iter: int
     type_save: str
+
+

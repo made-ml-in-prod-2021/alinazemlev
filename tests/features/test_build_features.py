@@ -5,9 +5,9 @@ sys.path.insert(0, PATH)
 
 import pandas as pd
 from py._path.local import LocalPath
-from project.features.build_features import build_pipeline, extract_target
+from ml_project.features.build_features import build_pipeline, extract_target
 import logging
-from project.enities import (
+from ml_project.enities import (
     SplitParams,
     FeaturesParams,
     ModelsParams,

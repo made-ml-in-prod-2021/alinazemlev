@@ -6,21 +6,21 @@ formatters:
 handlers:
   file_handler:
     class: logging.FileHandler
-    filename: project.log
+    filename: ml_project.log
     level: INFO
     formatter: simple
   file_handler_1:
     class: logging.FileHandler
-    filename: project.warn
+    filename: ml_project.warn
     level: WARNING
     formatter: simple
 
 loggers:
-  project:
+  ml_project:
     level: INFO
     handlers: [file_handler]
     propagate: no
-  project_warn:
+  ml_project_warn:
     level: WARNING
     handlers: [ file_handler, file_handler_1]
     propagate: no

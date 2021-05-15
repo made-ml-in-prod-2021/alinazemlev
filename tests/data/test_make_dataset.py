@@ -2,8 +2,8 @@ import os
 import sys
 PATH = os.getcwd()
 sys.path.insert(0, PATH)
-from project.data import read_data, split_train_val_data
-from project.enities import SplitParams
+from ml_project.data import read_data, split_train_val_data
+from ml_project.enities import SplitParams
 
 
 def test_load_dataset(input_data_path: str, target_col: str):

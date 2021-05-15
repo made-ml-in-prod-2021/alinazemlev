@@ -5,12 +5,12 @@ import sys
 PATH = os.getcwd()
 sys.path.insert(0, PATH)
 
-from project.predict import (
+from ml_project.predict import (
     predict_pipeline,
 
 )
 
-from project.enities import (
+from ml_project.enities import (
     SplitParams,
     FeaturesParams,
     ModelsParams,
@@ -21,7 +21,7 @@ from project.enities import (
 
 )
 
-from project.train import (
+from ml_project.train import (
     train_pipeline,
 
 )

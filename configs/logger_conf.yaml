@@ -1,0 +1,30 @@
+version: 1
+formatters:
+  simple:
+    class: logging.Formatter
+    format: "%(levelname)s: %(message)s"
+handlers:
+  file_handler:
+    class: logging.FileHandler
+    filename: ml_project.log
+    level: INFO
+    formatter: simple
+  file_handler_1:
+    class: logging.FileHandler
+    filename: ml_project.warn
+    level: WARNING
+    formatter: simple
+
+loggers:
+  ml_project:
+    level: INFO
+    handlers: [file_handler]
+    propagate: no
+  ml_project_warn:
+    level: WARNING
+    handlers: [ file_handler, file_handler_1]
+    propagate: no
+root:
+  level: INFO
+  handlers: [file_handler]
+  

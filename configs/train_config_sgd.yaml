@@ -1,0 +1,41 @@
+input_data_path: ml_project/data/raw/train.csv
+metric_path: ml_project/models/metrics.json
+split_params:
+  val_size: 0.1
+  random_state: 3
+models_params:
+  scaling_path:
+    ml_project/models/scaler.pkl
+  imputer_path:
+    ml_project/models/imputer.pkl
+  classifier_path_postfix:
+    ml_project/models/classifier.pkl
+  categorical_vectorizer_path:
+    ml_project/models/dv_x.pkl
+  fill_empty:
+    -111
+params_for_save:
+  path_to_save:
+    configs/predict_config_sgd.yaml
+features_params:
+  target_col:
+    target
+  binary_cols:
+    [ ]
+  categorical_cols:
+    [ ]
+  numerical_cols:
+    [ ]
+class_params:
+  type:
+    SGDClassifier
+  loss:
+    log
+  penalty:
+    l2
+  alpha:
+    0.0001
+  max_iter:
+    10000
+  type_save:
+    ""

@@ -1,20 +1,19 @@
+import time
 import logging
 import os
-import sys
 import joblib
 import uvicorn
 from typing import List, Union, Optional
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, conlist
-PATH = os.getcwd()
-sys.path.insert(0, PATH)
 import pipeline
 from pipeline import BuilderPipe
 
 logger = logging.getLogger(__name__)
 NAME_MODEL = "model.pkl"
 ITEMS = 13
+PATH = os.getcwd()
 
 
 def load_object(path: str) -> BuilderPipe:
@@ -35,6 +34,7 @@ class DiseasePrediction(BaseModel):
 
 
 model: Optional[BuilderPipe] = None
+time_start: float = 0.0
 
 
 def make_predict(
@@ -60,6 +60,9 @@ def main():
 @app.on_event("startup")
 def load_model():
     global model
+    global time_start
+    time.sleep(30)
+    time_start = time.time()
     model_path = os.getenv("PATH_TO_MODEL")
     if model_path is None:
         err = f"PATH_TO_MODEL {model_path} is None"
@@ -67,6 +70,18 @@ def load_model():
         raise RuntimeError(err)
 
     model = load_object(model_path)
+
+
+@app.get("/healthz")
+def health() -> bool:
+    return not (model is None)
+
+
+@app.get("/live")
+def live():
+    if time.time() - time_start >= 150:
+        raise HTTPException(404)
+    return True
 
 
 def load_glob_model():
@@ -84,4 +99,4 @@ def predict(request: DataModel):
 
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=os.getenv("PORT", 8000))
+    uvicorn.run("app:app", host="0.0.0.0", port=os.getenv("PORT", 80))

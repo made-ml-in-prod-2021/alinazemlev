@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: online-inference-resource
+  labels:
+    app: online-inference-resource
+spec:
+  containers:
+    - image: alinazemlev/online_inference:v1
+      name: online-inference-resource
+      ports:
+        - containerPort: 80
+      resources:
+        requests:
+          memory: "10Gi"
+          cpu: "500m"
+        limits:
+          memory: "10Gi"
+          cpu: "500m"
